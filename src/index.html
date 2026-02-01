@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextTV Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ─── TOPBAR: logo, sök, navigation ─── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#" class="logo" onclick="showStart()">
+        <span class="logo-icon">▦</span>
+        <span class="logo-text">TextTV<em>Online</em></span>
+      </a>
+
+      <div class="searchbox">
+        <input type="text" id="pageInput" class="page-input" placeholder="Hoppa till sida…" autocomplete="off" />
+        <button class="page-btn" onclick="goToPage()">→</button>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#" class="nav-link active" data-section="start" onclick="showStart()">Hem</a>
+        <a href="#" class="nav-link" data-section="inrikes" onclick="showSection('inrikes')">Inrikes</a>
+        <a href="#" class="nav-link" data-section="utrikes" onclick="showSection('utrikes')">Utrikes</a>
+        <a href="#" class="nav-link" data-section="sport" onclick="showSection('sport')">Sport</a>
+        <a href="#" class="nav-link" data-section="vader" onclick="showSection('vader')">Väder</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ─── HUVUDINNEHÅLL ─── -->
+  <main class="main">
+
+    <!-- STARTSIDAN: tre korts med korta sammanfattningar -->
+    <section id="start" class="section active">
+      <div class="start-grid">
+
+        <div class="start-card card-nyheter">
+          <div class="card-header">
+            <span class="card-tag">Nyheter</span>
+            <span class="card-pages">sid 100</span>
+          </div>
+          <div class="card-body" id="start-nyheter">
+            <div class="skeleton"></div>
+          </div>
+          <a href="#" class="card-footer" onclick="showSection('inrikes')">Läs mer →</a>
+        </div>
+
+        <div class="start-card card-sport">
+          <div class="card-header">
+            <span class="card-tag">Sport</span>
+            <span class="card-pages">sid 300</span>
+          </div>
+          <div class="card-body" id="start-sport">
+            <div class="skeleton"></div>
+          </div>
+          <a href="#" class="card-footer" onclick="showSection('sport')">Läs mer →</a>
+        </div>
+
+        <div class="start-card card-vader">
+          <div class="card-header">
+            <span class="card-tag">Väder</span>
+            <span class="card-pages">sid 401</span>
+          </div>
+          <div class="card-body" id="start-vader">
+            <div class="skeleton"></div>
+          </div>
+          <a href="#" class="card-footer" onclick="showSection('vader')">Läs mer →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INRIKESNYHETER -->
+    <section id="inrikes" class="section">
+      <div class="cat-header">
+        <h1 class="cat-title">Inrikesnyheter</h1>
+        <span class="cat-meta">Sidor 101–103</span>
+      </div>
+      <div class="page-tabs" id="tabs-inrikes">
+        <button class="tab active" onclick="loadPage('inrikes', 101, this)">101</button>
+        <button class="tab" onclick="loadPage('inrikes', 102, this)">102</button>
+        <button class="tab" onclick="loadPage('inrikes', 103, this)">103</button>
+      </div>
+      <div class="page-viewer" id="viewer-inrikes"><div class="skeleton"></div></div>
+    </section>
+
+    <!-- UTRIKESNYHETER -->
+    <section id="utrikes" class="section">
+      <div class="cat-header">
+        <h1 class="cat-title">Utrikesnyheter</h1>
+        <span class="cat-meta">Sidor 104–105</span>
+      </div>
+      <div class="page-tabs" id="tabs-utrikes">
+        <button class="tab active" onclick="loadPage('utrikes', 104, this)">104</button>
+        <button class="tab" onclick="loadPage('utrikes', 105, this)">105</button>
+      </div>
+      <div class="page-viewer" id="viewer-utrikes"><div class="skeleton"></div></div>
+    </section>
+
+    <!-- SPORT -->
+    <section id="sport" class="section">
+      <div class="cat-header">
+        <h1 class="cat-title">Sport</h1>
+        <span class="cat-meta">Sidor 300–302 · 330 · 377</span>
+      </div>
+      <div class="page-tabs" id="tabs-sport">
+        <button class="tab active" onclick="loadPage('sport', 300, this)">300</button>
+        <button class="tab" onclick="loadPage('sport', 301, this)">301</button>
+        <button class="tab" onclick="loadPage('sport', 302, this)">302</button>
+        <button class="tab" onclick="loadPage('sport', 330, this)">330 Resultat</button>
+        <button class="tab" onclick="loadPage('sport', 377, this)">377 Målservice</button>
+      </div>
+      <div class="page-viewer" id="viewer-sport"><div class="skeleton"></div></div>
+    </section>
+
+    <!-- VÄDER -->
+    <section id="vader" class="section">
+      <div class="cat-header">
+        <h1 class="cat-title">Väder</h1>
+        <span class="cat-meta">Sidor 400–401</span>
+      </div>
+      <div class="page-tabs" id="tabs-vader">
+        <button class="tab active" onclick="loadPage('vader', 400, this)">400 Väder</button>
+        <button class="tab" onclick="loadPage('vader', 401, this)">401 Idag / Imorgon</button>
+      </div>
+      <div class="page-viewer" id="viewer-vader"><div class="skeleton"></div></div>
+    </section>
+
+    <!-- CUSTOM: visas när gebruikare söker på ett sidnummer -->
+    <section id="custom" class="section">
+      <div class="cat-header">
+        <h1 class="cat-title" id="custom-title">Sida</h1>
+        <span class="cat-meta" id="custom-meta"></span>
+      </div>
+      <div class="page-viewer" id="viewer-custom"><div class="skeleton"></div></div>
+    </section>
+
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
