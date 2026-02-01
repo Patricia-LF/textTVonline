@@ -1,1 +1,1 @@
-This is a project I made during after learning the basics of node.js
+This is a side project I made after learning the basics of node.js. We had a group project, but I wanted to test myself and make a project on my own aswell.
