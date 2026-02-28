@@ -1,0 +1,126 @@
+/*hamburgermeny*/
+.hamburger {
+    display: none;
+    background: none;
+    border: 2px solid #48e5e1;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    box-shadow: 0px 0px 5px rgba(98, 250, 255, 0.89);
+}
+
+.hamburger img {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: brightness(0) saturate(100%) invert(85%) sepia(28%) saturate(2477%) hue-rotate(128deg) brightness(99%) contrast(97%);
+}
+
+.hamburger-icon {
+    display: block;
+}
+
+.close-icon {
+    display: none;
+}
+
+.hamburger.active .hamburger-icon {
+    display: none;
+}
+
+.hamburger.active .close-icon {
+    display: block;
+}
+
+/* MOBILE MENU OVERLAY */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--background-texture), var(--background);
+    transition: right 0.4s ease;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 2rem;
+    gap: 3rem;
+    height: 90%;
+    justify-content: center;
+}
+
+.mobile-menu a {
+    color: aqua;
+    text-decoration: none;
+    font-size: 3rem;
+    font-family: 'Text Me One', sans-serif;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 5px rgba(98, 250, 255, 0.89);
+}
+
+.searchbox {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid #48e5e1;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    width: 80%;
+    max-width: 300px;
+    margin-top: 4rem;
+    box-shadow: 0px 0px 5px rgba(98, 250, 255, 0.89);
+}
+
+.searchbox img {
+    width: 24px;
+    height: 24px;
+}
+
+.searchbox page-input {
+    background: none;
+    border: none;
+    color: #48e5e1;
+    font-size: 2rem;
+    font-family: 'Text Me One', sans-serif;
+    outline: none;
+    width: 100%;
+}
+
+.searchbox page-input::placeholder {
+    color: #48e5e1;
+    opacity: 0.7;
+    font-size: 2rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header-links {
+        display: none;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-menu {
+        display: none !important;
+    }
+}

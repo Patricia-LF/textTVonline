@@ -1,0 +1,27 @@
+:root {
+  --bg:          #eaf2fe;
+  --bg-card:     #111820;
+  --bg-card-alt: #0c2e43;
+  --border:      #2072a6;
+  --text:        #2072a6;
+  --text-dim:    #5a6a7e;
+  --text-bright: #eef2f7;
+
+  --cyan:   #00e5ff;
+  --green:  #39ff6e;
+  --amber:  #ffb830;
+  --red:    #ff4d6a;
+
+  --font-display: 'Syne', sans-serif;
+  --font-mont:    'Montserrat', sans-serif;
+}
+
+/* ─── TOPBAR ─── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(1, 15, 36, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
