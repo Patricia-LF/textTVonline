@@ -51,7 +51,7 @@ app.get('/api/start', async (req, res) => {
 
 // Allt annat → skicka index.html (så att navigering i browsern funkar)
 app.get('*s', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'public', 'index.html'))
+  res.sendFile(path.join(__dirname, 'src', 'index.html'))
 })
 
 // Startar servern
