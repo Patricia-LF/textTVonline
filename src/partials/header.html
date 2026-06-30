@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TextTV Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar" role="banner">
+      <div class="topbar-inner">
+        <a href="/pages/" class="logo" aria-label="TextTV Online – startsida">
+          <span class="logo-icon" aria-hidden="true">▦</span>
+          <span class="logo-text">TextTV<em>Online</em></span>
+        </a>
+
+        <div class="searchbox" role="search">
+          <input
+            type="text"
+            id="pageInput"
+            class="page-input"
+            placeholder="Sid 100–899…"
+            autocomplete="off"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            aria-label="Skriv ett sidnummer och tryck Enter"
+          />
+          <button
+            type="button"
+            class="page-btn"
+            id="goBtn"
+            aria-label="Gå till sida"
+          >
+            →
+          </button>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TextTV Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar" role="banner">
+      <div class="topbar-inner">
+        <a href="/" class="logo" aria-label="TextTV Online – startsida">
+          <span class="logo-icon" aria-hidden="true">▦</span>
+          <span class="logo-text">TextTV<em>Online</em></span>
+        </a>
+
+        <div class="searchbox" role="search">
+          <input
+            type="text"
+            id="pageInput"
+            class="page-input"
+            placeholder="Sid 100–899…"
+            autocomplete="off"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            aria-label="Skriv ett sidnummer och tryck Enter"
+          />
+          <button
+            type="button"
+            class="page-btn"
+            id="goBtn"
+            aria-label="Gå till sida"
+          >
+            →
+          </button>
+        </div>
+
+        <!-- Nav links scroll to each card on the start page -->
+        <nav class="nav-links" aria-label="Huvudnavigation">
+          <a href="#main-content" class="nav-link">Hem</a>
+          <a href="#card-nyheter" class="nav-link">Inrikes</a>
+          <a href="#card-utrikes" class="nav-link">Utrikes</a>
+          <a href="#card-sport" class="nav-link">Sport</a>
+          <a href="#card-vader" class="nav-link">Väder</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div class="hero-container">
+        <div class="hero">
+          <p class="hero-kicker">Sveriges nyheter</p>
+          <h1 class="hero-title">Text-TV<br /><em>Online</em></h1>
+          <p class="hero-sub">Alltid uppdaterat. Alltid tillgängligt.</p>
+        </div>
+        <!-- Weather widget -->
+        <div id="weather-widget" aria-label="Aktuellt väder"></div>
+      </div>
+
+      <!-- Preview cards — ids used as anchor targets from nav -->
+      <section aria-label="Senaste innehåll" class="start-grid">
+        <article
+          id="card-nyheter"
+          class="start-card card-nyheter"
+          aria-labelledby="card-label-nyheter"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-nyheter">Nyheter</span>
+            <span class="card-pages" aria-label="Texttv-sida 100">sid 100</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-nyheter"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/pages/domestic.html" class="card-footer">
+            Läs alla inrikesnyheter <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- Utrikes has no separate preview card yet but gets an id for nav -->
+        <article
+          id="card-utrikes"
+          class="start-card card-utrikes"
+          aria-labelledby="card-label-utrikes"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-utrikes">Utrikes</span>
+            <span class="card-pages" aria-label="Texttv-sida 104">sid 104</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-utrikes"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/pages/foreign.html" class="card-footer">
+            Läs alla utrikesnyheter <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article
+          id="card-sport"
+          class="start-card card-sport"
+          aria-labelledby="card-label-sport"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-sport">Sport</span>
+            <span class="card-pages" aria-label="Texttv-sida 300">sid 300</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-sport"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/pages/sport.html" class="card-footer">
+            Läs all sport <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article
+          id="card-vader"
+          class="start-card card-vader"
+          aria-labelledby="card-label-vader"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-vader">Väder</span>
+            <span class="card-pages" aria-label="Texttv-sida 401">sid 401</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-vader"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/pages/weather.html" class="card-footer">
+            Läs vädret <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      </section>
+    </main>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/weather-widget.js"></script>
+  </body>
+</html>

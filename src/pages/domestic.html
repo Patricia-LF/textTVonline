@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TextTV Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Love+Light&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mrs+Saint+Delafield&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=WindSong:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/domestic.css" />
+  </head>
+  <body>
+    <!-- ─── TOPBAR ─── -->
+    <header class="topbar" role="banner">
+      <div class="topbar-inner">
+        <a href="/" class="logo" aria-label="TextTV Online – startsida">
+          <span class="logo-icon" aria-hidden="true">▦</span>
+          <span class="logo-text">TextTV<em>Online</em></span>
+        </a>
+
+        <div class="searchbox" role="search">
+          <input
+            type="text"
+            id="pageInput"
+            class="page-input"
+            placeholder="Sid 100–899…"
+            autocomplete="off"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            aria-label="Skriv ett sidnummer och tryck Enter"
+          />
+          <button
+            type="button"
+            class="page-btn"
+            id="goBtn"
+            aria-label="Gå till sida"
+          >
+            →
+          </button>
+        </div>
+
+        <nav class="nav-links" aria-label="Huvudnavigation">
+          <a href="/" class="nav-link active" aria-current="page">Hem</a>
+          <a href="/domestic.html" class="nav-link">Inrikes</a>
+          <a href="/foreign.html" class="nav-link">Utrikes</a>
+          <a href="/sport.html" class="nav-link">Sport</a>
+          <a href="/weather.html" class="nav-link">Väder</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ─── MAIN ─── -->
+    <main id="main-content">
+      <div class="cat-header">
+        <h1 class="cat-title">Inrikes&shy;nyheter</h1>
+        <p class="cat-meta">Sidor 101–103 · SVT Text-TV</p>
+      </div>
+
+      <!-- Tab navigation -->
+      <div class="tabs-wrapper">
+        <div
+          class="page-tabs"
+          role="tablist"
+          aria-label="Välj nyhetssida"
+          id="tabs-inrikes"
+        >
+          <button
+            type="button"
+            class="tab active"
+            role="tab"
+            id="tab-101"
+            aria-selected="true"
+            aria-controls="viewer-inrikes"
+            data-page="101"
+          >
+            Sida 101
+          </button>
+
+          <button
+            type="button"
+            class="tab"
+            role="tab"
+            id="tab-102"
+            aria-selected="false"
+            aria-controls="viewer-inrikes"
+            data-page="102"
+          >
+            Sida 102
+          </button>
+
+          <button
+            type="button"
+            class="tab"
+            role="tab"
+            id="tab-103"
+            aria-selected="false"
+            aria-controls="viewer-inrikes"
+            data-page="103"
+          >
+            Sida 103
+          </button>
+        </div>
+      </div>
+
+      <!-- Content viewer -->
+      <div
+        class="page-viewer"
+        id="viewer-inrikes"
+        role="tabpanel"
+        aria-labelledby="tab-101"
+        aria-live="polite"
+        aria-busy="true"
+      ></div>
+    </main>
+
+    <script src="/js/domestic.js"></script>
+  </body>
+</html>
