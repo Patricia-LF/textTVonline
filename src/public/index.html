@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TextTV Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar" role="banner">
+      <div class="topbar-inner">
+        <a href="/" class="logo" aria-label="TextTV Online – startsida">
+          <span class="logo-icon" aria-hidden="true">▦</span>
+          <span class="logo-text">TextTV<em>Online</em></span>
+        </a>
+
+        <div class="searchbox" role="search">
+          <input
+            type="text"
+            id="pageInput"
+            class="page-input"
+            placeholder="Sid 100–899…"
+            autocomplete="off"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            aria-label="Skriv ett sidnummer och tryck Enter"
+          />
+          <button
+            type="button"
+            class="page-btn"
+            id="goBtn"
+            aria-label="Gå till sida"
+          >
+            →
+          </button>
+        </div>
+
+        <!-- Nav links scroll to each card on the start page -->
+        <nav class="nav-links" aria-label="Huvudnavigation">
+          <a href="#main-content" class="nav-link" data-section="hem">
+            <svg
+              class="nav-icon"
+              viewBox="0 0 64 64"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M62.79,29.172l-28-28C34.009,0.391,32.985,0,31.962,0s-2.047,0.391-2.828,1.172l-28,28
+      c-1.562,1.566-1.484,4.016,0.078,5.578c1.566,1.57,3.855,1.801,5.422,0.234L8,33.617V60c0,2.211,1.789,4,4,4h16V48h8v16h16
+      c2.211,0,4-1.789,4-4V33.695l1.195,1.195c1.562,1.562,3.949,1.422,5.516-0.141C64.274,33.188,64.356,30.734,62.79,29.172z"
+              />
+            </svg>
+            Hem
+          </a>
+
+          <a href="#card-nyheter" class="nav-link" data-section="nyheter">
+            <svg
+              class="nav-icon"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M28,14h-5V6c0-0.6-0.4-1-1-1H4C3.4,5,3,5.4,3,6v18c0,2.2,1.8,4,4,4h17c0.1,0,0.2,0,0.3-0.1c0.2,0,0.4,0.1,0.7,0.1
+        c2.2,0,4-1.8,4-4v-9C29,14.4,28.6,14,28,14z M10,16H8c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S10.6,16,10,16z M14,12H8
+        c-0.6,0-1-0.4-1-1s0.4-1,1-1h6c0.6,0,1,0.4,1,1S14.6,12,14,12z M27,24c0,1.1-0.9,2-2,2c-0.2,0-0.4,0-0.6-0.1c0,0,0,0,0,0
+        c-0.6-0.2-1-0.7-1.2-1.2c0,0,0-0.1,0-0.1C23,24.4,23,24.2,23,24v-8h4V24z"
+              />
+            </svg>
+            Inrikes
+          </a>
+
+          <a href="#card-utrikes" class="nav-link" data-section="utrikes">
+            <svg
+              class="nav-icon"
+              viewBox="0 0 64 64"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <g fill="currentColor">
+                <path
+                  d="M32,3.457C25.496,9.84,21.152,18.418,20.203,28h23.594C42.848,18.418,38.504,9.84,32,3.457z"
+                />
+                <path
+                  d="M38.812,0c6.148,7.367,12.148,17.871,12.984,28H64C62.398,15.195,51.812,3.875,38.812,0z"
+                />
+                <path
+                  d="M20.203,36C21.152,45.582,25.496,54.16,32,60.543C38.504,54.16,42.848,45.582,43.797,36H20.203z"
+                />
+                <path
+                  d="M0,28h12.203c0.836-10.129,6.836-20.633,12.984-28C12.062,4.062,1.602,15.195,0,28z"
+                />
+                <path
+                  d="M25.125,64c-6.148-7.367-12.086-17.871-12.922-28H0C1.602,48.805,12.062,60.125,25.125,64z"
+                />
+                <path
+                  d="M64,36H51.797c-0.836,10.129-6.836,20.633-12.984,28C52,60.125,62.398,48.805,64,36z"
+                />
+              </g>
+            </svg>
+            Utrikes
+          </a>
+
+          <a href="#card-sport" class="nav-link" data-section="sport">
+            <svg
+              class="nav-icon"
+              viewBox="0 0 512 512"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <g fill="currentColor">
+                <path
+                  d="M102.49,0c0,27.414,0,104.166,0,137.062c0,112.391,99.33,156.25,153.51,156.25
+          c54.18,0,153.51-43.859,153.51-156.25c0-32.896,0-109.648,0-137.062H102.49z M256.289,50.551l-68.164,29.768v98.474l-0.049,19.53
+          c-0.526-0.112-47.274-10.112-47.274-78.391c0-28.17,0-69.6,0-69.6h60.385L256.289,50.551z"
+                />
+                <polygon
+                  points="315.473,400.717 291.681,367.482 279.791,318.506 256,322.004 232.209,318.506 220.314,367.482 
+          205.347,388.394 196.527,400.476 196.699,400.476 196.527,400.717 	"
+                />
+                <polygon
+                  points="366.93,432.24 366.93,432 145.07,432 145.07,511.598 145.07,511.76 145.07,511.76 145.07,512 
+          366.93,512 366.93,432.402 366.93,432.24 	"
+                />
+                <path
+                  d="M511.638,96.668c-0.033-1.268-0.068-2.336-0.068-3.174V45.1h-73.889v38.736h35.152v9.658
+          c0,1.127,0.037,2.557,0.086,4.258c0.389,13.976,1.303,46.707-21.545,70.203c-5.121,5.266-11.221,9.787-18.219,13.613
+          c-3.883,17.635-10.109,33.564-18.104,47.814c26.561-6.406,48.026-17.898,64.096-34.422
+          C513.402,159.734,512.121,113.918,511.638,96.668z"
+                />
+                <path
+                  d="M60.625,167.955c-22.848-23.496-21.934-56.227-21.541-70.203c0.047-1.701,0.082-3.131,0.082-4.258v-9.658
+          h34.842h0.07l0,0h0.24V45.1H0.43v48.394c0,0.838-0.032,1.906-0.068,3.174c-0.482,17.25-1.76,63.066,32.494,98.293
+          c16.068,16.524,37.531,28.014,64.092,34.422c-7.996-14.25-14.22-30.182-18.103-47.816C71.846,177.74,65.746,173.221,60.625,167.955
+          z"
+                />
+              </g>
+            </svg>
+            Sport
+          </a>
+
+          <a href="#card-vader" class="nav-link" data-section="vader">
+            <svg
+              class="nav-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                opacity="0.5"
+                d="M11.5 8C11.5 9.933 9.933 11.5 8 11.5C6.067 11.5 4.5 9.933 4.5 8C4.5 6.067 6.067 4.5 8 4.5C9.933 4.5 11.5 6.067 11.5 8Z"
+                fill="currentColor"
+              />
+              <g opacity="0.5">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M7.5 1.25C7.91421 1.25 8.25 1.58579 8.25 2V2.5C8.25 2.91421 7.91421 3.25 7.5 3.25C7.08579 3.25 6.75 2.91421 6.75 2.5V2C6.75 1.58579 7.08579 1.25 7.5 1.25ZM3.08086 3.08059C3.37375 2.78769 3.84862 2.78769 4.14152 3.08059L4.35758 3.29665C4.65047 3.58954 4.65047 4.06441 4.35758 4.35731C4.06468 4.6502 3.58981 4.6502 3.29692 4.35731L3.08086 4.14125C2.78796 3.84835 2.78796 3.37348 3.08086 3.08059ZM11.919 3.08073C12.2119 3.37362 12.2119 3.8485 11.919 4.14139L11.7029 4.35745C11.41 4.65034 10.9352 4.65034 10.6423 4.35745C10.3494 4.06456 10.3494 3.58968 10.6423 3.29679L10.8583 3.08073C11.1512 2.78784 11.6261 2.78784 11.919 3.08073ZM1.25 7.5C1.25 7.08579 1.58579 6.75 2 6.75H2.5C2.91421 6.75 3.25 7.08579 3.25 7.5C3.25 7.91421 2.91421 8.25 2.5 8.25H2C1.58579 8.25 1.25 7.91421 1.25 7.5ZM4.35758 10.6427C4.65047 10.9356 4.65047 11.4105 4.35758 11.7034L4.14152 11.9194C3.84862 12.2123 3.37375 12.2123 3.08086 11.9194C2.78796 11.6265 2.78796 11.1516 3.08086 10.8588L3.29692 10.6427C3.58981 10.3498 4.06468 10.3498 4.35758 10.6427Z"
+                  fill="currentColor"
+                />
+              </g>
+              <path
+                d="M16.2857 22C19.4416 22 22 19.4717 22 16.3529C22 13.8811 20.393 11.7802 18.1551 11.015C17.8371 8.19371 15.4159 6 12.4762 6C9.32028 6 6.7619 8.52827 6.7619 11.6471C6.7619 12.3369 6.88706 12.9978 7.11616 13.6089C6.8475 13.5567 6.56983 13.5294 6.28571 13.5294C3.91878 13.5294 2 15.4256 2 17.7647C2 20.1038 3.91878 22 6.28571 22H16.2857Z"
+                fill="currentColor"
+              />
+            </svg>
+            Väder
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div class="hero-container">
+        <div class="hero">
+          <p class="hero-kicker">Sveriges nyheter</p>
+          <h1 class="hero-title">Text-TV<br /><em>Online</em></h1>
+          <p class="hero-sub">Alltid uppdaterat. Alltid tillgängligt.</p>
+        </div>
+        <!-- Weather widget -->
+        <div id="weather-widget" aria-label="Aktuellt väder"></div>
+      </div>
+
+      <!-- Preview cards — ids used as anchor targets from nav -->
+      <section aria-label="Senaste innehåll" class="start-grid">
+        <article
+          id="card-nyheter"
+          class="start-card card-nyheter"
+          aria-labelledby="card-label-nyheter"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-nyheter"
+              >Nyheter
+              <svg
+                class="tag-img"
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  fill="currentColor"
+                  d="M28,14h-5V6c0-0.6-0.4-1-1-1H4C3.4,5,3,5.4,3,6v18c0,2.2,1.8,4,4,4h17c0.1,0,0.2,0,0.3-0.1c0.2,0,0.4,0.1,0.7,0.1
+	c2.2,0,4-1.8,4-4v-9C29,14.4,28.6,14,28,14z M10,16H8c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S10.6,16,10,16z M14,12H8
+	c-0.6,0-1-0.4-1-1s0.4-1,1-1h6c0.6,0,1,0.4,1,1S14.6,12,14,12z M27,24c0,1.1-0.9,2-2,2c-0.2,0-0.4,0-0.6-0.1c0,0,0,0,0,0
+	c-0.6-0.2-1-0.7-1.2-1.2c0,0,0-0.1,0-0.1C23,24.4,23,24.2,23,24v-8h4V24z"
+                /></svg
+            ></span>
+            <span class="card-pages" aria-label="Texttv-sida 100">sid 100</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-nyheter"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/domestic.html" class="card-footer">
+            Läs alla inrikesnyheter <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <!-- Utrikes has no separate preview card yet but gets an id for nav -->
+        <article
+          id="card-utrikes"
+          class="start-card card-utrikes"
+          aria-labelledby="card-label-utrikes"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-utrikes"
+              >Utrikes
+              <svg
+                class="nav-icon"
+                viewBox="0 0 64 64"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <g fill="currentColor">
+                  <path
+                    d="M32,3.457C25.496,9.84,21.152,18.418,20.203,28h23.594C42.848,18.418,38.504,9.84,32,3.457z"
+                  />
+                  <path
+                    d="M38.812,0c6.148,7.367,12.148,17.871,12.984,28H64C62.398,15.195,51.812,3.875,38.812,0z"
+                  />
+                  <path
+                    d="M20.203,36C21.152,45.582,25.496,54.16,32,60.543C38.504,54.16,42.848,45.582,43.797,36H20.203z"
+                  />
+                  <path
+                    d="M0,28h12.203c0.836-10.129,6.836-20.633,12.984-28C12.062,4.062,1.602,15.195,0,28z"
+                  />
+                  <path
+                    d="M25.125,64c-6.148-7.367-12.086-17.871-12.922-28H0C1.602,48.805,12.062,60.125,25.125,64z"
+                  />
+                  <path
+                    d="M64,36H51.797c-0.836,10.129-6.836,20.633-12.984,28C52,60.125,62.398,48.805,64,36z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span class="card-pages" aria-label="Texttv-sida 104">sid 104</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-utrikes"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/foreign.html" class="card-footer">
+            Läs alla utrikesnyheter <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article
+          id="card-sport"
+          class="start-card card-sport"
+          aria-labelledby="card-label-sport"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-sport"
+              >Sport
+              <svg
+                class="tag-img"
+                viewBox="0 0 512 512"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <g fill="currentColor">
+                  <path
+                    d="M102.49,0c0,27.414,0,104.166,0,137.062c0,112.391,99.33,156.25,153.51,156.25
+		c54.18,0,153.51-43.859,153.51-156.25c0-32.896,0-109.648,0-137.062H102.49z M256.289,50.551l-68.164,29.768v98.474l-0.049,19.53
+		c-0.526-0.112-47.274-10.112-47.274-78.391c0-28.17,0-69.6,0-69.6h60.385L256.289,50.551z"
+                  />
+                  <polygon
+                    points="315.473,400.717 291.681,367.482 279.791,318.506 256,322.004 232.209,318.506 220.314,367.482 
+		205.347,388.394 196.527,400.476 196.699,400.476 196.527,400.717 	"
+                  />
+                  <polygon
+                    points="366.93,432.24 366.93,432 145.07,432 145.07,511.598 145.07,511.76 145.07,511.76 145.07,512 
+		366.93,512 366.93,432.402 366.93,432.24 	"
+                  />
+                  <path
+                    d="M511.638,96.668c-0.033-1.268-0.068-2.336-0.068-3.174V45.1h-73.889v38.736h35.152v9.658
+		c0,1.127,0.037,2.557,0.086,4.258c0.389,13.976,1.303,46.707-21.545,70.203c-5.121,5.266-11.221,9.787-18.219,13.613
+		c-3.883,17.635-10.109,33.564-18.104,47.814c26.561-6.406,48.026-17.898,64.096-34.422
+		C513.402,159.734,512.121,113.918,511.638,96.668z"
+                  />
+                  <path
+                    d="M60.625,167.955c-22.848-23.496-21.934-56.227-21.541-70.203c0.047-1.701,0.082-3.131,0.082-4.258v-9.658
+		h34.842h0.07l0,0h0.24V45.1H0.43v48.394c0,0.838-0.032,1.906-0.068,3.174c-0.482,17.25-1.76,63.066,32.494,98.293
+		c16.068,16.524,37.531,28.014,64.092,34.422c-7.996-14.25-14.22-30.182-18.103-47.816C71.846,177.74,65.746,173.221,60.625,167.955
+		z"
+                  />
+                </g></svg
+            ></span>
+            <span class="card-pages" aria-label="Texttv-sida 300">sid 300</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-sport"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/sport.html" class="card-footer">
+            Läs all sport <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article
+          id="card-vader"
+          class="start-card card-vader"
+          aria-labelledby="card-label-vader"
+        >
+          <div class="card-header">
+            <span class="card-tag" id="card-label-vader"
+              >Väder
+              <svg
+                class="tag-img"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  opacity="0.5"
+                  d="M11.5 8C11.5 9.933 9.933 11.5 8 11.5C6.067 11.5 4.5 9.933 4.5 8C4.5 6.067 6.067 4.5 8 4.5C9.933 4.5 11.5 6.067 11.5 8Z"
+                  fill="currentColor"
+                />
+                <g opacity="0.5">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M7.5 1.25C7.91421 1.25 8.25 1.58579 8.25 2V2.5C8.25 2.91421 7.91421 3.25 7.5 3.25C7.08579 3.25 6.75 2.91421 6.75 2.5V2C6.75 1.58579 7.08579 1.25 7.5 1.25ZM3.08086 3.08059C3.37375 2.78769 3.84862 2.78769 4.14152 3.08059L4.35758 3.29665C4.65047 3.58954 4.65047 4.06441 4.35758 4.35731C4.06468 4.6502 3.58981 4.6502 3.29692 4.35731L3.08086 4.14125C2.78796 3.84835 2.78796 3.37348 3.08086 3.08059ZM11.919 3.08073C12.2119 3.37362 12.2119 3.8485 11.919 4.14139L11.7029 4.35745C11.41 4.65034 10.9352 4.65034 10.6423 4.35745C10.3494 4.06456 10.3494 3.58968 10.6423 3.29679L10.8583 3.08073C11.1512 2.78784 11.6261 2.78784 11.919 3.08073ZM1.25 7.5C1.25 7.08579 1.58579 6.75 2 6.75H2.5C2.91421 6.75 3.25 7.08579 3.25 7.5C3.25 7.91421 2.91421 8.25 2.5 8.25H2C1.58579 8.25 1.25 7.91421 1.25 7.5ZM4.35758 10.6427C4.65047 10.9356 4.65047 11.4105 4.35758 11.7034L4.14152 11.9194C3.84862 12.2123 3.37375 12.2123 3.08086 11.9194C2.78796 11.6265 2.78796 11.1516 3.08086 10.8588L3.29692 10.6427C3.58981 10.3498 4.06468 10.3498 4.35758 10.6427Z"
+                    fill="currentColor"
+                  />
+                </g>
+                <path
+                  d="M16.2857 22C19.4416 22 22 19.4717 22 16.3529C22 13.8811 20.393 11.7802 18.1551 11.015C17.8371 8.19371 15.4159 6 12.4762 6C9.32028 6 6.7619 8.52827 6.7619 11.6471C6.7619 12.3369 6.88706 12.9978 7.11616 13.6089C6.8475 13.5567 6.56983 13.5294 6.28571 13.5294C3.91878 13.5294 2 15.4256 2 17.7647C2 20.1038 3.91878 22 6.28571 22H16.2857Z"
+                  fill="currentColor"
+                /></svg
+            ></span>
+            <span class="card-pages" aria-label="Texttv-sida 401">sid 401</span>
+          </div>
+          <div
+            class="card-body"
+            id="start-vader"
+            aria-live="polite"
+            aria-busy="true"
+          ></div>
+          <a href="/weather.html" class="card-footer">
+            Läs vädret <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      </section>
+    </main>
+    <footer>
+      © 2026 Text-TV online, Patricia Loayza Frykberg, All rights reserved
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/weather-widget.js"></script>
+  </body>
+</html>
