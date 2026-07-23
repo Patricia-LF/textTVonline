@@ -1,50 +1,119 @@
-// script.js — startsidans logik
-// Hämtar preview-innehåll för de tre korten och hanterar sidbyte via sökrutan
+// script.js — TextTV Online
+// Handles page navigation, content loading and mobile menu
 
-/**
- * Strips most HTML tags from Text-TV content and returns plain text.
- * Keeps newlines for readability.
- */
-function stripHTML(html) {
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  return div.textContent || div.innerText || "";
+// ── Page configuration ──
+const PAGE_GROUPS = [
+  { pages: [100], label: "Nyheter" },
+  { pages: [101, 102, 103], label: "Inrikes" },
+  { pages: [104, 105], label: "Utrikes" },
+  { pages: [300, 301, 302], label: "Sport" },
+  { pages: [330], label: "Resultatbörsen" },
+  { pages: [376], label: "Målservice" },
+  { pages: [377], label: "Målservice, resultat" },
+  { pages: [400], label: "Väder" },
+  { pages: [401], label: "Vädret idag/imorgon" },
+  { pages: [600, 650, 651, 652, 653, 654, 655, 656], label: "TV-tablåer" },
+  { pages: [700], label: "Innehåll" },
+];
+
+const CATEGORY_CONFIG = {
+  100: { color: "#00c8ff", label: "Nyheter" },
+  101: { color: "#00c8ff", label: "Inrikes" },
+  102: { color: "#00c8ff", label: "Inrikes" },
+  103: { color: "#00c8ff", label: "Inrikes" },
+  104: { color: "#f472b6", label: "Utrikes" },
+  105: { color: "#f472b6", label: "Utrikes" },
+  300: { color: "#34d399", label: "Sport" },
+  301: { color: "#34d399", label: "Sport" },
+  302: { color: "#34d399", label: "Sport" },
+  330: { color: "#34d399", label: "Resultatbörsen" },
+  376: { color: "#34d399", label: "Målservice" },
+  377: { color: "#34d399", label: "Målservice, resultat" },
+  400: { color: "#c084fc", label: "Väder" },
+  401: { color: "#c084fc", label: "Vädret idag/imorgon" },
+  600: { color: "#fbbf24", label: "TV-tablåer" },
+  700: { color: "#9898b0", label: "Innehåll" },
+};
+
+// All pages 100–899 available for browsing
+const MIN_PAGE = 100;
+const MAX_PAGE = 899;
+
+// ── State ──
+let currentPage = 100;
+
+// ── DOM references — assigned after DOM is ready ──
+let viewer,
+  titleEl,
+  pageNrEl,
+  contentHeader,
+  heroContainer,
+  pageNavInfo,
+  prevBtn,
+  nextBtn;
+
+// ── Get label for a page number ──
+function getLabelForPage(pageNum) {
+  for (const group of PAGE_GROUPS) {
+    if (group.pages.includes(pageNum)) return group.label;
+  }
+  return `Sida ${pageNum}`;
 }
 
-/**
- * Renders fetched Text-TV data into a preview card.
- * Shows the first subpage's plain text, clamped visually via CSS.
- */
-function renderPreview(containerId, pages) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
+// ── Load and display a page ──
+async function loadPage(pageNum) {
+  currentPage = pageNum;
+  const isHome = pageNum === 100;
 
-  fetch(`/api/page/${pages}`)
-    .then((res) => {
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json();
-    })
-    .then((data) => {
-      const firstPage = data[0];
-      if (!firstPage) throw new Error("Tom sida");
+  // Show hero on start page, content header on all other pages
+  heroContainer.hidden = !isHome;
+  contentHeader.hidden = isHome;
 
-      // Combine all content blocks into one string
-      const rawHTML = Array.isArray(firstPage.content)
-        ? firstPage.content.join("\n")
-        : firstPage.content || "";
+  // Update heading, page number and color
+  titleEl.textContent = getLabelForPage(pageNum);
+  pageNrEl.textContent = `sid ${pageNum}`;
 
-      const text = stripHTML(rawHTML).trim();
+  const config = CATEGORY_CONFIG[pageNum];
+  titleEl.style.color = config && !isHome ? config.color : "";
 
-      el.setAttribute("aria-busy", "false");
-      el.innerHTML = `<div class="texttv-content">${text || "Ingen data tillgänglig."}</div>`;
-    })
-    .catch(() => {
-      el.setAttribute("aria-busy", "false");
-      el.innerHTML = '<p class="error-msg">Kunde inte ladda innehåll.</p>';
-    });
+  // Update navigation buttons
+  prevBtn.disabled = pageNum <= MIN_PAGE;
+  nextBtn.disabled = pageNum >= MAX_PAGE;
+  pageNavInfo.textContent = `sid ${pageNum}`;
+
+  // Mark active row in sidebar
+  document.querySelectorAll(".sidebar-item").forEach((btn) => {
+    const active = Number(btn.dataset.page) === pageNum;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-current", active ? "true" : "false");
+  });
+
+  // Fetch content
+  viewer.setAttribute("aria-busy", "true");
+  viewer.innerHTML = "";
+
+  try {
+    const res = await fetch(`/api/page/${pageNum}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    const firstPage = data[0];
+    if (!firstPage) throw new Error("Empty page");
+
+    const rawHTML = Array.isArray(firstPage.content)
+      ? firstPage.content.join("\n")
+      : firstPage.content || "";
+
+    viewer.setAttribute("aria-busy", "false");
+    viewer.innerHTML = `<div class="texttv-content">${rawHTML}</div>`;
+  } catch {
+    viewer.setAttribute("aria-busy", "false");
+    viewer.innerHTML =
+      '<p class="error-msg">Kunde inte ladda sidan. Försök igen senare.</p>';
+  }
 }
 
-// ── Navigation: go to page on Enter or button click ──
+// ── Search ──
 function goToPage() {
   const input = document.getElementById("pageInput");
   const page = parseInt(input.value, 10);
@@ -56,66 +125,96 @@ function goToPage() {
   }
 
   input.removeAttribute("aria-invalid");
-  window.location.href = `/custom.html?page=${page}`;
+  input.value = "";
+  loadPage(page);
 }
 
-/**
- * Scrolls so the target element appears vertically centered in the viewport,
- * but never scrolls above the topbar.
- */
-function scrollToCenter(el) {
-  const topbar = document.querySelector(".topbar");
-  const topbarH = topbar ? topbar.getBoundingClientRect().height : 0;
-  const rect = el.getBoundingClientRect();
-  const elCenter = rect.top + window.scrollY + rect.height / 2;
-  const viewportCenter = (window.innerHeight - topbarH) / 2 + topbarH;
-  const target = elCenter - viewportCenter;
-
-  window.scrollTo({ top: Math.max(0, target), behavior: "smooth" });
+// ── Mobile menu ──
+function openSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebarOverlay");
+  const toggle = document.getElementById("sidebarToggle");
+  sidebar.classList.add("open");
+  overlay.classList.add("visible");
+  toggle.setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden";
 }
 
+function closeSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebarOverlay");
+  const toggle = document.getElementById("sidebarToggle");
+  sidebar.classList.remove("open");
+  overlay.classList.remove("visible");
+  toggle.setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
+}
+
+// ── Init ──
 document.addEventListener("DOMContentLoaded", () => {
-  // Intercept anchor clicks in nav and scroll to center instead.
-  // Hem (#main-content) scrolls to the very top; all other anchors center their card.
-  document.querySelectorAll('.nav-link[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
+  viewer = document.getElementById("page-viewer");
+  titleEl = document.getElementById("content-title");
+  pageNrEl = document.getElementById("content-pagenr");
+  contentHeader = document.getElementById("content-header");
+  heroContainer = document.getElementById("hero-container");
+  pageNavInfo = document.getElementById("page-nav-info");
+  prevBtn = document.getElementById("prevBtn");
+  nextBtn = document.getElementById("nextBtn");
 
-      document.querySelectorAll(".nav-link").forEach((l) => {
-        l.classList.remove("active");
-        l.removeAttribute("aria-current");
-      });
-      link.classList.add("active");
-      link.setAttribute("aria-current", "page");
-
-      const href = link.getAttribute("href");
-      if (href === "#main-content") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
-      const id = href.slice(1);
-      const target = document.getElementById(id);
-      if (target) scrollToCenter(target);
+  // Sidebar buttons
+  document.querySelectorAll(".sidebar-item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      loadPage(Number(btn.dataset.page));
+      closeSidebar();
     });
   });
 
-  // Load all four preview cards in parallel
-  renderPreview("start-nyheter", "100");
-  renderPreview("start-utrikes", "104");
-  renderPreview("start-sport", "300");
-  renderPreview("start-vader", "401");
+  // Intercept Text-TV internal page links and load them in the viewer
+  viewer.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
 
-  // Search button
-  const goBtn = document.getElementById("goBtn");
-  if (goBtn) {
-    goBtn.addEventListener("click", goToPage);
-  }
+    const href = link.getAttribute("href");
+    if (!href) return;
 
-  // Enter key in input
-  const input = document.getElementById("pageInput");
-  if (input) {
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") goToPage();
-    });
-  }
+    // Strip leading slash, then take the first page number (e.g. "110-111" → 110)
+    const clean = href.replace(/^\//, "").split("-")[0];
+    const pageNum = parseInt(clean, 10);
+
+    if (pageNum >= 100 && pageNum <= 899) {
+      e.preventDefault();
+      loadPage(pageNum);
+    }
+  });
+
+  // Browse buttons — step one page at a time
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > MIN_PAGE) loadPage(currentPage - 1);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < MAX_PAGE) loadPage(currentPage + 1);
+  });
+
+  // Search field
+  document.getElementById("goBtn").addEventListener("click", goToPage);
+  document.getElementById("pageInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") goToPage();
+  });
+
+  // Mobile menu
+  document
+    .getElementById("sidebarToggle")
+    .addEventListener("click", openSidebar);
+  document
+    .getElementById("sidebarOverlay")
+    .addEventListener("click", closeSidebar);
+
+  // Close drawer with Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSidebar();
+  });
+
+  // Load start page
+  loadPage(100);
 });
